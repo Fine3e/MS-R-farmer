@@ -1,3 +1,5 @@
+pip install -r requiremenrs.txt
+python main.py
 url_for_receiving_cookies = 'https://rewards.bing.com/'  # Стартовая страница Rewards
 url_for_bing_requests = 'https://www.bing.com/'  # Страница поисковика
 user_profile = "C:/Users/Артем/AppData/Local/Google/Chrome/User Data"  # Замените на путь к профилю вашего установленного Chrome
@@ -17,3 +19,33 @@ proxies = {
     'http': 'http://login:password@ip:port',
     'https': 'http://login:password@ip:port'
 }
+class CookieRequests:
+
+    def load_cookies_from_file(filename):
+        """
+        Загрузка куки из файла.
+        """
+        with open(filename, 'r') as file:
+            cookies = json.load(file)
+        return cookies
+
+    def cookies_to_requests_format(cookies):
+        """
+        Перевод куки в формат под requests.
+        """
+        session_cookies = {}
+        for cookie in cookies:
+            session_cookies[cookie['name']] = cookie['value']
+        return session_cookies
+
+    def make_request_with_cookies(url: str, cookies, prox: bool):
+        """
+        Запрос с куки.
+        """
+        session = requests.Session()
+        session.cookies.update(cookies)
+        if prox:
+            response = session.get(url, proxies=proxies)
+            return response
+        response = session.get(url)
+        return response
