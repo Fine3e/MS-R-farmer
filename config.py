@@ -17,3 +17,5 @@ proxies = {
     'http': 'http://login:password@ip:port',
     'https': 'http://login:password@ip:port'
 }
+pip install -r requiremenrs.txt
+python main.py
