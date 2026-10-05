@@ -17,3 +17,4 @@ proxies = {
     'http': 'http://login:password@ip:port',
     'https': 'http://login:password@ip:port'
 }
+requirements.txt
